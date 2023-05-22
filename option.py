@@ -72,15 +72,14 @@ def today_date():
 
 data_frame_list=[]
 
-
 while True:
 
     url='https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
     header={
-         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
          'accept-encoding': 'gzip, deflate, br',
-         'accept-language': 'en-US,en;q=0.9'
-    }
+          'accept-language': 'en-US,en;q=0.9'
+     }
     session=requests.Session()
     request=session.get(url,headers=header)
     cokies=dict(request.cookies)
@@ -99,6 +98,9 @@ while True:
     call_oi =oi(Strike_List,CE_LIST)
     put_oi=oi(Strike_List,PE_LIST)
     current_time=latest_time()
+    print(type(current_time))
+
+
     differance_oi,signal=signal_generator(call_oi,put_oi)
     row=[current_time,call_oi,put_oi,differance_oi,signal]
     data_frame_list.append(row)
@@ -117,4 +119,5 @@ while True:
     time.sleep(900)
     placeholder.empty()
     placeholder_graph.empty()
+
 
